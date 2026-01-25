@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharwan Kumar | Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            cursor: none;
+        }
+        
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.5);
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: difference;
+            transition: transform 0.2s ease;
+        }
+        
+        .cursor-dot {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #3b82f6;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease;
+        }
+        
+        .skill-range {
+            position: relative;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .skill-fill {
+            position: absolute;
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        
+        .skill-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .skill-card:hover {
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+            background: rgba(59, 130, 246, 0.05);
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tech-stack {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            padding: 4px 12px;
+            margin: 4px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-stack:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: scale(1.05);
+        }
+        
+        .profile-img-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .pulse-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1); opacity: 0; }
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.5), transparent);
+            margin: 3rem 0;
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: 2px solid #3b82f6;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #3b82f6 }
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-white">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-dot"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-5 px-6 bg-gray-950/90 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold">
+                <span class="hero-gradient">SK</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">Home</a>
+                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">Projects</a>
+                <a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">Contact</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="lg:w-1/2 mb-16 lg:mb-0">
+                    <h1 class="text-5xl md:text-6xl font-bold mb-4">
+                        <span class="hero-gradient">Sharwan Kumar</span>
+                    </h1>
+                    
+                    <div class="mb-6">
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-300 mb-4 typewriter">
+                            Full Stack Web Developer
+                        </h2>
+                        
+                        <div class="flex flex-wrap mb-8">
+                            <span class="tech-stack">Java</span>
+                            <span class="tech-stack">Python</span>
+                            <span class="tech-stack">JavaScript</span>
+                            <span class="tech-stack">React.js</span>
+                            <span class="tech-stack">Node.js</span>
+                            <span class="tech-stack">Tailwind CSS</span>
+                            <span class="tech-stack">Bootstrap</span>
+                            <span class="tech-stack">Django</span>
+                            <span class="tech-stack">Flask</span>
+                            <span class="tech-stack">ml.js</span>
+                            <span class="tech-stack">p5.js</span>
+                            <span class="tech-stack">MySQL</span>
+                            <span class="tech-stack">MariaDB</span>
+                            <span class="tech-stack">MongoDB</span>
+                            <span class="tech-stack">Next.js</span>
+                            <span class="tech-stack">Flutter</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-400 text-lg mb-8">
+                        Passionate developer creating innovative web solutions with modern technologies. 
+                        Currently pursuing Computer Science at University of the People and actively seeking 
+                        Web Developer roles.
+                    </p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="#contact" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-8 rounded-lg font-medium transition-all duration-300 glow">
+                            Contact Me
+                        </a>
+                        <a href="#projects" class="border border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white py-3 px-8 rounded-lg font-medium transition-all duration-300">
+                            View Projects
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex space-x-4">
+                        <a href="https://github.com/sharwaninsa" target="_blank" class="social-icon">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="https://instagram.com/sharwaninsa" target="_blank" class="social-icon">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="https://facebook.com/sharwankumarinsa" target="_blank" class="social-icon">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="mailto:sharwankumarinsa@gmail.com" class="social-icon">
+                            <i class="fas fa-envelope text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="lg:w-2/5 flex justify-center">
+                    <div class="profile-img-container">
+                        <div class="pulse-ring"></div>
+                        <img id="portfolio-portrait" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" 
+                             alt="Sharwan Kumar Portrait" 
+                             class="profile-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center">Technical Skills</h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                I specialize in full-stack web development with expertise across multiple technologies and frameworks.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Skills will be dynamically generated -->
+            </div>
+            
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold mb-8 text-center">Currently Learning & Exploring</h3>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="px-6 py-3 bg-gray-900 border border-gray-800 rounded-full">
+                        <span class="text-blue-400 font-medium">Advanced React Patterns</span>
+                    </div>
+                    <div class="px-6 py-3 bg-gray-900 border border-gray-800 rounded-full">
+                        <span class="text-blue-400 font-medium">Microservices Architecture</span>
+                    </div>
+                    <div class="px-6 py-3 bg-gray-900 border border-gray-800 rounded-full">
+                        <span class="text-blue-400 font-medium">Cloud Deployment (AWS)</span>
+                    </div>
+                    <div class="px-6 py-3 bg-gray-900 border border-gray-800 rounded-full">
+                        <span class="text-blue-400 font-medium">GraphQL APIs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold mb-4 text-center">Projects</h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Here are some of my recent web development projects showcasing my skills.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Projects will be dynamically generated -->
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-8 text-center text-blue-400">Current Projects</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Current projects will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold mb-4 text-center">Get In Touch</h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                I'm currently open to Web Developer roles and freelance opportunities.
+            </p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-400">Connect With Me</h3>
+                    
+                    <div class="space-y-6 mb-10">
+                        <a href="mailto:sharwankumarinsa@gmail.com" class="flex items-center text-gray-300 hover:text-blue-400 transition-colors">
+                            <div class="bg-blue-600/20 p-3 rounded-lg mr-4">
+                                <i class="fas fa-envelope text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Email</h4>
+                                <p>sharwankumarinsa@gmail.com</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://github.com/sharwaninsa" target="_blank" class="flex items-center text-gray-300 hover:text-blue-400 transition-colors">
+                            <div class="bg-gray-800 p-3 rounded-lg mr-4">
+                                <i class="fab fa-github text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">GitHub</h4>
+                                <p>github.com/sharwaninsa</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://instagram.com/sharwaninsa" target="_blank" class="flex items-center text-gray-300 hover:text-blue-400 transition-colors">
+                            <div class="bg-pink-600/20 p-3 rounded-lg mr-4">
+                                <i class="fab fa-instagram text-pink-400"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Instagram</h4>
+                                <p>@sharwaninsa</p>
+                            </div>
+                        </a>
+                        
+                        <a href="https://facebook.com/sharwankumarinsa" target="_blank" class="flex items-center text-gray-300 hover:text-blue-400 transition-colors">
+                            <div class="bg-blue-700/20 p-3 rounded-lg mr-4">
+                                <i class="fab fa-facebook text-blue-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Facebook</h4>
+                                <p>@sharwankumarinsa</p>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="p-4 bg-blue-900/20 border border-blue-800/30 rounded-lg">
+                        <p class="text-blue-300">
+                            <i class="fas fa-briefcase mr-2"></i> 
+                            <span class="font-medium">Open to work:</span> Web Developer roles • Freelance projects
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-900/50 border border-gray-800 rounded-2xl p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-blue-400">Send Message</h3>
+                    <form id="contact-form">
+                        <div class="mb-6">
+                            <label class="block mb-2 font-medium">Your Name</label>
+                            <input type="text" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block mb-2 font-medium">Your Email</label>
+                            <input type="email" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block mb-2 font-medium">Your Message</label>
+                            <textarea rows="5" class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your message" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3 px-8 rounded-lg font-medium w-full transition-all duration-300 glow">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-gray-900 border-t border-gray-800">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-2xl font-bold">
+                        <span class="hero-gradient">Sharwan Kumar</span>
+                    </h3>
+                    <p class="text-gray-400 mt-2">Full Stack Web Developer</p>
+                </div>
+                
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-400">
+                        <i class="fas fa-map-marker-alt mr-2 text-blue-400"></i> 
+                        Delhi, India
+                    </p>
+                </div>
+                
+                <div class="flex space-x-4">
+                    <a href="https://github.com/sharwaninsa" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://instagram.com/sharwaninsa" target="_blank" class="text-gray-400 hover:text-white">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="mailto:sharwankumarinsa@gmail.com" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-envelope text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                <p>© 2023 Sharwan Kumar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Technical Skills Data with 90%+ proficiency
+        const skills = [
+            { name: "Java", level: 95 },
+            { name: "Python", level: 92 },
+            { name: "JavaScript", level: 94 },
+            { name: "React.js", level: 93 },
+            { name: "Node.js", level: 91 },
+            { name: "Tailwind CSS", level: 96 },
+            { name: "Bootstrap", level: 94 },
+            { name: "Django", level: 90 },
+            { name: "Flask", level: 89 },
+            { name: "MySQL", level: 92 },
+            { name: "MongoDB", level: 88 },
+            { name: "Next.js", level: 87 },
+            { name: "Flutter", level: 85 },
+            { name: "API Development", level: 91 },
+            { name: "Git & GitHub", level: 94 },
+            { name: "Responsive Design", level: 96 }
+        ];
+        
+        const projects = [
+            { 
+                name: "Banking Service Platform", 
+                description: "Full-fledged banking website with Axis Bank APIs integration",
+                tags: ["API", "Full-stack", "Banking"],
+                status: "Current"
+            },
+            { 
+                name: "Travel Booking System", 
+                description: "Integrated travel booking with travelpayout and IRCTC APIs",
+                tags: ["Travel", "API", "React"],
+                status: "Current"
+            },
+            { 
+                name: "E-Commerce Dashboard", 
+                description: "Admin dashboard with analytics and inventory management",
+                tags: ["React", "Node.js", "MongoDB"],
+                status: "Completed"
+            },
+            { 
+                name: "Real-time Chat Application", 
+                description: "WebSocket based chat app with user authentication",
+                tags: ["Socket.io", "Express", "React"],
+                status: "Completed"
+            }
+        ];
+        
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
+        
+        // Make cursor smaller on hover over clickable elements
+        const clickableElements = document.querySelectorAll('a, button, .tech-stack, .social-icon, .project-card');
+        clickableElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(0.5)';
+                cursor.style.background = 'rgba(59, 130, 246, 0.8)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.background = 'rgba(59, 130, 246, 0.5)';
+            });
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Render skills with 90%+ fill
+            const skillsContainer = document.querySelector('#skills .grid:first-child');
+            skills.forEach(skill => {
+                const skillCard = document.createElement('div');
+                skillCard.className = 'skill-card p-6 rounded-xl';
+                skillCard.innerHTML = `
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-lg">${skill.name}</h4>
+                        <span class="text-blue-400 font-bold">${skill.level}%</span>
+                    </div>
+                    <div class="skill-range">
+                        <div class="skill-fill" data-width="${skill.level}%"></div>
+                    </div>
+                `;
+                skillsContainer.appendChild(skillCard);
+            });
+            
+            // Render projects
+            const projectsContainer = document.querySelector('#projects .grid:first-child');
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'skill-card p-6 rounded-xl';
+                
+                const statusBadge = project.status === 'Current' 
+                    ? '<span class="bg-green-900/50 text-green-300 text-xs py-1 px-3 rounded-full font-medium">In Progress</span>'
+                    : '<span class="bg-blue-900/50 text-blue-300 text-xs py-1 px-3 rounded-full font-medium">Completed</span>';
+                
+                projectCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">${project.name}</h3>
+                        ${statusBadge}
+                    </div>
+                    <p class="text-gray-400 mb-4">${project.description}</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${project.tags.map(tag => `<span class="bg-gray-800 text-gray-300 text-xs py-1 px-3 rounded-full">${tag}</span>`).join('')}
+                    </div>
+                `;
+                projectsContainer.appendChild(projectCard);
+            });
+            
+            // Animate skill bars when they come into view
+            const animateSkillBars = () => {
+                const skillFills = document.querySelectorAll('.skill-fill');
+                skillFills.forEach(fill => {
+                    const rect = fill.getBoundingClientRect();
+                    if (rect.top < window.innerHeight - 100) {
+                        fill.style.width = fill.getAttribute('data-width');
+                    }
+                });
+            };
+            
+            // Initial animation
+            setTimeout(animateSkillBars, 500);
+            
+            // Animate on scroll
+            window.addEventListener('scroll', animateSkillBars);
+            
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.querySelector('#mobile-menu');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    if (mobileMenu) {
+                        mobileMenu.classList.toggle('hidden');
+                    }
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Get form values
+                    const name = this.querySelector('input[type="text"]').value;
+                    const email = this.querySelector('input[type="email"]').value;
+                    const message = this.querySelector('textarea').value;
+                    
+                    // Simple validation
+                    if (!name || !email || !message) {
+                        alert('Please fill in all fields');
+                        return;
+                    }
+                    
+                    // In a real application, you would send this data to a server
+                    // For this demo, we'll just show an alert
+                    alert(`Thank you ${name}! Your message has been sent. I'll get back to you soon.`);
+                    
+                    // Reset form
+                    this.reset();
+                });
+            }
+            
+            // Portrait replacement instruction
+            console.log("To add your own portrait, replace the src attribute of the image with id='portfolio-portrait'");
+            
+            // Add hover effect to all skill cards
+            const skillCards = document.querySelectorAll('.skill-card');
+            skillCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.classList.add('glow');
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('glow');
+                });
+            });
+        });
+        
+        // Hide cursor when not moving
+        let timeout;
+        document.addEventListener('mousemove', () => {
+            cursor.style.opacity = '1';
+            cursorDot.style.opacity = '1';
+            
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                cursor.style.opacity = '0';
+                cursorDot.style.opacity = '0';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
