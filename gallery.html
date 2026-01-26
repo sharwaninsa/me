@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharwan Kumar | Creative Gallery</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Explore my creative gallery featuring web development projects, designs, and technical work. View detailed images and project showcases.">
+    <meta name="keywords" content="Sharwan Kumar, Web Developer, Gallery, Projects, Portfolio, Design, Code">
+    <meta name="author" content="Sharwan Kumar">
+    
+    <!-- Open Graph Tags (Dynamic) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sharwan Kumar Portfolio">
+    <meta property="og:title" content="Sharwan Kumar | Creative Gallery" id="og-title">
+    <meta property="og:description" content="Explore my creative gallery featuring web development projects, designs, and technical work." id="og-description">
+    <meta property="og:image" content="https://sharwaninsa.github.io/me/IMG-20260125-WA0000.jpg" id="og-image">
+    <meta property="og:url" content="" id="og-url">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Sharwan Kumar | Creative Gallery">
+    <meta property="twitter:description" content="Explore my creative gallery featuring web development projects, designs, and technical work.">
+    <meta property="twitter:image" content="https://sharwaninsa.github.io/me/IMG-20260125-WA0000.jpg">
+    
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-auto-rows: 250px;
+            grid-gap: 20px;
+            grid-auto-flow: dense;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(100%) brightness(0.85);
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gallery-item:hover {
+            filter: grayscale(0%) brightness(1);
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+        
+        /* Different sizes for mosaic effect */
+        .gallery-item:nth-child(3n) {
+            grid-column: span 2;
+            grid-row: span 1;
+        }
+        
+        .gallery-item:nth-child(5n) {
+            grid-row: span 2;
+        }
+        
+        .gallery-item:nth-child(7n) {
+            grid-column: span 1;
+            grid-row: span 2;
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .image-overlay {
+            transform: translateY(0);
+        }
+        
+        .image-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .image-category {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            background: rgba(59, 130, 246, 0.3);
+            padding: 2px 10px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+        
+        /* Fullscreen View Styles */
+        .fullscreen-view {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .fullscreen-view.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+        
+        .fullscreen-info {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            text-align: center;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-btn.prev {
+            left: 20px;
+        }
+        
+        .nav-btn.next {
+            right: 20px;
+        }
+        
+        .not-found {
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-top: 5px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 py-5 px-6 bg-gray-950/90 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <a href="index.html" class="text-2xl font-bold">
+                    <span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">SK</span>
+                </a>
+                <span class="text-gray-400 hidden md:inline">|</span>
+                <a href="index.html" class="text-gray-300 hover:text-blue-400 transition-colors hidden md:inline">Back to Portfolio</a>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="#gallery" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">Gallery</a>
+                <a href="#categories" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">Categories</a>
+            </div>
+            
+            <button id="mobile-menu-btn" class="md:hidden text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-20 px-6 container mx-auto">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                Creative Gallery
+            </h1>
+            <p class="text-gray-400 max-w-2xl mx-auto">
+                Explore my collection of projects, designs, and technical work. Click on any image to view details.
+            </p>
+        </div>
+        
+        <!-- Category Filter -->
+        <div id="categories" class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="code">Code</button>
+            <button class="category-btn" data-category="design">Design</button>
+            <button class="category-btn" data-category="mobile">Mobile</button>
+            <button class="category-btn" data-category="data">Data</button>
+            <button class="category-btn" data-category="cloud">Cloud</button>
+        </div>
+        
+        <!-- Gallery Container -->
+        <div id="gallery-container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+            </div>
+            
+            <div id="not-found" class="not-found hidden">
+                <h2 class="text-3xl font-bold mb-4">404 - Image Not Found</h2>
+                <p class="text-gray-400 mb-8">The image you're looking for doesn't exist, but here are some other amazing works:</p>
+                <div id="alternative-gallery" class="gallery-grid"></div>
+            </div>
+            
+            <div id="gallery" class="gallery-grid hidden"></div>
+        </div>
+    </main>
+
+    <!-- Fullscreen View -->
+    <div class="fullscreen-view" id="fullscreen-view">
+        <button class="close-btn" id="close-fullscreen">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <button class="nav-btn prev" id="prev-btn">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <button class="nav-btn next" id="next-btn">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <img class="fullscreen-image" id="fullscreen-image" src="" alt="">
+        
+        <div class="fullscreen-info">
+            <h2 id="fullscreen-title" class="text-3xl font-bold mb-2"></h2>
+            <p id="fullscreen-category" class="text-blue-400"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 bg-gray-900/50 border-t border-gray-800 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-gray-400">
+                © 2023 Sharwan Kumar. All rights reserved.
+            </p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="https://github.com/sharwaninsa" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-github text-xl"></i>
+                </a>
+                <a href="https://instagram.com/sharwaninsa" target="_blank" class="text-gray-400 hover:text-white">
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a href="mailto:sharwankumarinsa@gmail.com" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Global variables
+        let galleryImages = [];
+        let currentImageIndex = 0;
+        let filteredImages = [];
+        
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadGallery();
+            setupEventListeners();
+            handleURLHash();
+            setupMetaTags();
+        });
+        
+        // Load gallery from JSON
+        async function loadGallery() {
+            try {
+                const response = await fetch('gallery.json');
+                const data = await response.json();
+                galleryImages = data.images;
+                filteredImages = [...galleryImages];
+                
+                renderGallery();
+                hideLoading();
+                
+                // If there's a hash in URL, show specific image
+                const hash = window.location.hash.substring(1);
+                if (hash) {
+                    const imageId = parseInt(hash);
+                    const imageIndex = galleryImages.findIndex(img => img.id === imageId);
+                    if (imageIndex !== -1) {
+                        currentImageIndex = imageIndex;
+                        showFullscreenImage(currentImageIndex);
+                        updateMetaTagsForImage(galleryImages[currentImageIndex]);
+                    } else {
+                        showNotFound();
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading gallery:', error);
+                hideLoading();
+                showNotFound();
+            }
+        }
+        
+        // Render gallery
+        function renderGallery() {
+            const galleryContainer = document.getElementById('gallery');
+            galleryContainer.innerHTML = '';
+            
+            filteredImages.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.dataset.index = index;
+                galleryItem.dataset.category = image.category;
+                
+                galleryItem.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" class="gallery-img">
+                    <div class="image-overlay">
+                        <div class="image-title">${image.title}</div>
+                        <span class="image-category">${image.category}</span>
+                    </div>
+                `;
+                
+                galleryItem.addEventListener('click', () => {
+                    currentImageIndex = filteredImages.findIndex(img => img.id === image.id);
+                    showFullscreenImage(currentImageIndex);
+                    updateURLHash(image.id);
+                    updateMetaTagsForImage(image);
+                });
+                
+                galleryContainer.appendChild(galleryItem);
+            });
+            
+            galleryContainer.classList.remove('hidden');
+        }
+        
+        // Show fullscreen image
+        function showFullscreenImage(index) {
+            if (filteredImages.length === 0) return;
+            
+            const image = filteredImages[index];
+            const fullscreenView = document.getElementById('fullscreen-view');
+            const fullscreenImage = document.getElementById('fullscreen-image');
+            const fullscreenTitle = document.getElementById('fullscreen-title');
+            const fullscreenCategory = document.getElementById('fullscreen-category');
+            
+            fullscreenImage.src = image.url;
+            fullscreenImage.alt = image.title;
+            fullscreenTitle.textContent = image.title;
+            fullscreenCategory.textContent = `#${image.category}`;
+            
+            currentImageIndex = index;
+            fullscreenView.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Hide fullscreen
+        function hideFullscreen() {
+            const fullscreenView = document.getElementById('fullscreen-view');
+            fullscreenView.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            updateMetaTagsForGallery(); // Reset to gallery meta tags
+        }
+        
+        // Navigate to next/prev image
+        function navigateFullscreen(direction) {
+            if (direction === 'next') {
+                currentImageIndex = (currentImageIndex + 1) % filteredImages.length;
+            } else {
+                currentImageIndex = (currentImageIndex - 1 + filteredImages.length) % filteredImages.length;
+            }
+            
+            const image = filteredImages[currentImageIndex];
+            const fullscreenImage = document.getElementById('fullscreen-image');
+            const fullscreenTitle = document.getElementById('fullscreen-title');
+            const fullscreenCategory = document.getElementById('fullscreen-category');
+            
+            fullscreenImage.style.opacity = '0';
+            
+            setTimeout(() => {
+                fullscreenImage.src = image.url;
+                fullscreenImage.alt = image.title;
+                fullscreenTitle.textContent = image.title;
+                fullscreenCategory.textContent = `#${image.category}`;
+                fullscreenImage.style.opacity = '1';
+                updateURLHash(image.id);
+                updateMetaTagsForImage(image);
+            }, 200);
+        }
+        
+        // Update URL hash
+        function updateURLHash(imageId) {
+            window.location.hash = `#${imageId}`;
+            updateOGURL();
+        }
+        
+        // Handle URL hash changes
+        function handleURLHash() {
+            window.addEventListener('hashchange', () => {
+                const hash = window.location.hash.substring(1);
+                if (!hash) {
+                    // No hash, show gallery
+                    hideFullscreen();
+                    updateMetaTagsForGallery();
+                    return;
+                }
+                
+                const imageId = parseInt(hash);
+                const imageIndex = galleryImages.findIndex(img => img.id === imageId);
+                
+                if (imageIndex !== -1) {
+                    const filteredIndex = filteredImages.findIndex(img => img.id === imageId);
+                    if (filteredIndex !== -1) {
+                        currentImageIndex = filteredIndex;
+                        showFullscreenImage(currentImageIndex);
+                        updateMetaTagsForImage(galleryImages[imageIndex]);
+                    }
+                } else {
+                    showNotFound();
+                }
+            });
+        }
+        
+        // Show not found page
+        function showNotFound() {
+            document.getElementById('gallery').classList.add('hidden');
+            document.getElementById('loading').classList.add('hidden');
+            document.getElementById('not-found').classList.remove('hidden');
+            
+            // Show alternative gallery
+            const alternativeGallery = document.getElementById('alternative-gallery');
+            alternativeGallery.innerHTML = '';
+            
+            // Show random 6 images
+            const randomImages = [...galleryImages].sort(() => 0.5 - Math.random()).slice(0, 6);
+            
+            randomImages.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                galleryItem.innerHTML = `
+                    <img src="${image.url}" alt="${image.title}" class="gallery-img">
+                    <div class="image-overlay">
+                        <div class="image-title">${image.title}</div>
+                        <span class="image-category">${image.category}</span>
+                    </div>
+                `;
+                
+                galleryItem.addEventListener('click', () => {
+                    const imageIndex = galleryImages.findIndex(img => img.id === image.id);
+                    currentImageIndex = imageIndex;
+                    showFullscreenImage(currentImageIndex);
+                    updateURLHash(image.id);
+                    updateMetaTagsForImage(image);
+                });
+                
+                alternativeGallery.appendChild(galleryItem);
+            });
+        }
+        
+        // Filter by category
+        function filterByCategory(category) {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            categoryButtons.forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            if (category === 'all') {
+                filteredImages = [...galleryImages];
+            } else {
+                filteredImages = galleryImages.filter(image => image.category === category);
+            }
+            
+            renderGallery();
+        }
+        
+        // Update meta tags for specific image
+        function updateMetaTagsForImage(image) {
+            document.title = `${image.title} | Sharwan Kumar Gallery`;
+            document.getElementById('og-title').content = `${image.title} | Sharwan Kumar Gallery`;
+            document.getElementById('og-description').content = `View ${image.title} in my creative gallery. Category: ${image.category}`;
+            document.getElementById('og-image').content = image.url;
+            updateOGURL();
+        }
+        
+        // Update meta tags for gallery view
+        function updateMetaTagsForGallery() {
+            document.title = 'Sharwan Kumar | Creative Gallery';
+            document.getElementById('og-title').content = 'Sharwan Kumar | Creative Gallery';
+            document.getElementById('og-description').content = 'Explore my creative gallery featuring web development projects, designs, and technical work.';
+            document.getElementById('og-image').content = 'https://sharwaninsa.github.io/me/IMG-20260125-WA0000.jpg';
+            updateOGURL();
+        }
+        
+        // Update OG URL
+        function updateOGURL() {
+            const currentURL = window.location.href;
+            document.getElementById('og-url').content = currentURL;
+            
+            // Update canonical link
+            let canonical = document.querySelector('link[rel="canonical"]');
+            if (!canonical) {
+                canonical = document.createElement('link');
+                canonical.rel = 'canonical';
+                document.head.appendChild(canonical);
+            }
+            canonical.href = currentURL.split('#')[0];
+        }
+        
+        // Setup initial meta tags
+        function setupMetaTags() {
+            updateOGURL();
+            
+            // Create canonical link if not exists
+            if (!document.querySelector('link[rel="canonical"]')) {
+                const canonical = document.createElement('link');
+                canonical.rel = 'canonical';
+                canonical.href = window.location.href.split('#')[0];
+                document.head.appendChild(canonical);
+            }
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Close fullscreen
+            document.getElementById('close-fullscreen').addEventListener('click', hideFullscreen);
+            
+            // Navigation buttons
+            document.getElementById('prev-btn').addEventListener('click', () => navigateFullscreen('prev'));
+            document.getElementById('next-btn').addEventListener('click', () => navigateFullscreen('next'));
+            
+            // Escape key to close fullscreen
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    hideFullscreen();
+                } else if (e.key === 'ArrowLeft') {
+                    navigateFullscreen('prev');
+                } else if (e.key === 'ArrowRight') {
+                    navigateFullscreen('next');
+                }
+            });
+            
+            // Click outside image to close
+            document.getElementById('fullscreen-view').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('fullscreen-view')) {
+                    hideFullscreen();
+                }
+            });
+            
+            // Category filter buttons
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterByCategory(btn.dataset.category);
+                });
+            });
+            
+            // Mobile menu (simplified)
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                alert('Mobile menu would open here. In a full implementation, this would toggle a menu.');
+            });
+        }
+        
+        // Utility functions
+        function hideLoading() {
+            document.getElementById('loading').classList.add('hidden');
+        }
+        
+        // Smooth scroll to gallery
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
