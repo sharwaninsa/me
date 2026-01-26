@@ -1,76 +1,10 @@
 {
   "images": [
     {
-      "id": 1,
-      "url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Web Development",
-      "category": "code"
-    },
-    {
-      "id": 2,
-      "url": "https://images.unsplash.com/photo-1555099962-4199c345e5dd?ixlib=rb-4.0.3&auto=format&fit=crop&w-600&q=80",
-      "title": "UI Design",
-      "category": "design"
-    },
-    {
-      "id": 3,
-      "url": "https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Mobile Apps",
-      "category": "mobile"
-    },
-    {
-      "id": 4,
-      "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Data Analytics",
-      "category": "data"
-    },
-    {
-      "id": 5,
-      "url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Cloud Computing",
-      "category": "cloud"
-    },
-    {
-      "id": 6,
-      "url": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "API Integration",
-      "category": "code"
-    },
-    {
-      "id": 7,
-      "url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Database Design",
-      "category": "data"
-    },
-    {
-      "id": 8,
-      "url": "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "DevOps",
-      "category": "cloud"
-    },
-    {
-      "id": 9,
-      "url": "https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Responsive Design",
-      "category": "design"
-    },
-    {
-      "id": 10,
-      "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Frontend Magic",
-      "category": "code"
-    },
-    {
-      "id": 11,
-      "url": "https://images.unsplash.com/photo-1551650992-ee4fd47df41f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "Backend Logic",
-      "category": "code"
-    },
-    {
-      "id": 12,
-      "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-      "title": "System Architecture",
-      "category": "cloud"
+      "id": "4e8rg48erw4g89w4g984g84wr89g499",
+      "url": "myfirst.jpg",
+      "title": "Personal",
+      "category": "personal"
     }
   ]
 }
