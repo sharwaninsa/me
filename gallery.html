@@ -398,7 +398,7 @@
                 // If there's a hash in URL, show specific image
                 const hash = window.location.hash.substring(1);
                 if (hash) {
-                    const imageId = parseInt(hash);
+                    const imageId = hash;
                     const imageIndex = galleryImages.findIndex(img => img.id === imageId);
                     if (imageIndex !== -1) {
                         currentImageIndex = imageIndex;
@@ -518,7 +518,7 @@
                     return;
                 }
                 
-                const imageId = parseInt(hash);
+                const imageId = hash;
                 const imageIndex = galleryImages.findIndex(img => img.id === imageId);
                 
                 if (imageIndex !== -1) {
